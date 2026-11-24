@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-rd-flow-64"
+description = "RD Flow 64: a 271M-parameter model that draws real 64x64 pixel art with exact palettes and transparency. Loader, generator and LLM caption writer nodes."
+version = "1.0.0"
+license = { file = "LICENSE" }
+dependencies = ["transformers>=4.57", "huggingface_hub>=0.25", "safetensors>=0.4", "numpy", "pillow"]
+
+[project.urls]
+Repository = "https://github.com/Retro-Diffusion/rd-flow-64"
+Documentation = "https://github.com/Retro-Diffusion/rd-flow-64#comfyui"
+
+[tool.comfy]
+PublisherId = "retrodiffusion"
+DisplayName = "RD Flow 64"
+Icon = "https://raw.githubusercontent.com/Retro-Diffusion/rd-flow-64/main/examples/dragon.png"

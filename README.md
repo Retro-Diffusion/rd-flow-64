@@ -166,6 +166,31 @@ images = pipe(caption, palette=["#1a1c2c", "#5d275d", "#b13e53", "#ef7d57", "#ff
 print(pipe.timings)                           # {"prompt_s": ..., "draw_s": ..., "seeds": [...]}
 ```
 
+## ComfyUI
+
+This repository is also a ComfyUI custom node pack. Clone it into `ComfyUI/custom_nodes` and install its requirements
+with ComfyUI's Python, then restart ComfyUI:
+
+```bash
+cd ComfyUI/custom_nodes
+git clone https://github.com/Retro-Diffusion/rd-flow-64
+pip install -r rd-flow-64/requirements.txt
+```
+
+The nodes are under **RD Flow 64**, and [`workflows/rd-flow-64.json`](workflows/rd-flow-64.json) is a ready workflow
+(drag it onto the canvas):
+
+| Node | |
+| --- | --- |
+| RD Flow 64 Loader | the drawing model and prompt reader, downloaded once from Hugging Face; device and precision options |
+| RD Flow 64 Generate | caption -> 64 x 64 images: `image` (RGB), `mask` (the alpha, 1 = transparent, like Load Image), the `palette`, and `rgba`, which Save Image writes as a transparent PNG; seed, batch, transparent or opaque, palette lock, and a nearest-neighbour preview scale |
+| RD Flow 64 Caption Writer | a short idea -> the long caption the model needs, with any OpenAI-compatible LLM (Ollama, LM Studio, OpenRouter) |
+| RD Flow 64 System Prompt | the recommended system prompt and request, to wire into your own LLM node |
+| RD Flow 64 Clean Caption | the clean-up to run on your LLM's answer |
+
+Set `scale` to 1 on the Generate node when you want the real 64 x 64 pixels (for example before saving sprites); the
+default 8 is for looking at them.
+
 ## Low-memory tips
 
 - **8 GB of RAM:** it works. On the CPU the prompt reader is memory-mapped straight from its files, so the system can page it out instead of running out of memory; an 8 GB M2 peaks at 3.3 GB with drawing on the Apple GPU.

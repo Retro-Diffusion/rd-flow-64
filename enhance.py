@@ -14,15 +14,9 @@ The rules are in rdflow/prompting.py and PROMPTING.md.
 from __future__ import annotations
 
 import argparse
-import json
 import os
-import random
-import urllib.request
 
-from rdflow.prompting import finalize, messages
-
-OPENROUTER = "https://openrouter.ai/api/v1"
-OLLAMA = "http://localhost:11434/v1"
+from rdflow.llm import OLLAMA, OPENROUTER, write_caption
 
 
 def _config() -> tuple[str, str, str]:
@@ -35,30 +29,11 @@ def _config() -> tuple[str, str, str]:
     return base.rstrip("/"), model, key
 
 
-def _chat(base: str, model: str, key: str, msgs: list, temperature: float) -> str:
-    body = json.dumps({"model": model, "messages": msgs, "temperature": temperature, "max_tokens": 700}).encode()
-    req = urllib.request.Request(f"{base}/chat/completions", data=body, method="POST",
-                                 headers={"Content-Type": "application/json",
-                                          **({"Authorization": f"Bearer {key}"} if key else {})})
-    with urllib.request.urlopen(req, timeout=120) as r:
-        data = json.loads(r.read())
-    return (data.get("choices") or [{}])[0].get("message", {}).get("content") or ""
-
-
 def expand(request: str, transparent: bool = True, palette=None, attempts: int = 3) -> str:
     """The caption for a short request. Falls back to the request itself if the LLM never gives a usable answer."""
     base, model, key = _config()
-    seed = random.randrange(1 << 30)
-    for i in range(attempts):
-        try:
-            text = finalize(_chat(base, model, key, messages(request, transparent, palette, seed + i), 0.5 + 0.1 * i),
-                            transparent)
-        except OSError as exc:
-            print(f"LLM request failed ({exc}); is the server at {base} running?")
-            continue
-        if text:
-            return text
-    return request
+    return write_caption(request, base=base, model=model, key=key, transparent=transparent, palette=palette,
+                         attempts=attempts)
 
 
 def main() -> None:
