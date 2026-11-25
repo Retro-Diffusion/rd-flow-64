@@ -18,6 +18,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ---
 
 This license covers the code in this repository only. The RD Flow 64 model weights are licensed separately under
-Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0): https://huggingface.co/Retro-Diffusion/rd-flow-64
+the RD Flow 64 Model License (MODEL_LICENSE.md, and https://huggingface.co/Retro-Diffusion/rd-flow-64): non-commercial
+use of the model, the images you make are yours, no training on outputs.
 The prompt reader, part of Qwen3-VL-4B-Instruct by the Qwen team, is licensed under Apache 2.0 (see text_encoder/NOTICE
 in the Hugging Face repo).

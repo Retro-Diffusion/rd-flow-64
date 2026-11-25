@@ -226,6 +226,14 @@ pixels, dozens of styles, animation, tilesets, editing, background removal and 3
 
 ## License
 
-The code in this repository is MIT licensed. The RD Flow 64 weights are licensed under
-[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (non-commercial use with attribution). The prompt
-reader is part of Qwen3-VL-4B-Instruct by the Qwen team, under the Apache 2.0 license.
+The code in this repository is MIT licensed (`LICENSE`). The RD Flow 64 weights are licensed under the [RD Flow 64 Model License](MODEL_LICENSE.md). In short:
+
+- **The model is non-commercial.** The model, access to it and anything made from it (fine-tunes, merges, LoRAs,
+  distillations) may not be sold, traded or used commercially: no games that ship it or call it, no paid or
+  ad-supported sites, apps or APIs offering it, no paid services built on it.
+- **Your images are yours.** You own the images you make and can use them for anything, commercially included:
+  assets in a game, images on your website or in your ads, or selling them directly.
+- **No training on outputs.** Images made with RD Flow 64 may not be used to train or improve any AI model.
+
+The prompt reader is part of Qwen3-VL-4B-Instruct by the Qwen team, under the Apache 2.0 license. For commercial
+use, generate with [Retro Diffusion](https://retrodiffusion.ai).
